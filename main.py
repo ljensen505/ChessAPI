@@ -1,12 +1,12 @@
-import os
-
-from flask import Flask, Response
+from flask import Flask, Response, request
 from dotenv import load_dotenv
 from chess import Chess
 import time
+from os import getenv
 
 app = Flask(__name__)
 load_dotenv()
+PORT = getenv("PORT")
 
 
 @app.route("/")
@@ -68,5 +68,4 @@ def update_game() -> dict:
 
 if __name__ == "__main__":
     chess = Chess()
-    port = os.environ.get('PORT')
-    app.run(debug=True, port=port)
+    app.run(debug=True, port=int(PORT))
