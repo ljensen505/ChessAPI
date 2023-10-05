@@ -3,8 +3,11 @@ from os import environ
 
 load_dotenv()
 
-workers = 4
-bind = f"127.0.0.1:{environ.get('PORT')}"
-worker_class = f"uvicorn.workers.UvicornWorker"
+# Get the PORT environment variable and convert it to an integer with a default value of 8000
+port = int(environ.get("PORT", 8000))
 
-# gunicorn -c gunicorn_config.py app.main:app
+workers = 4
+bind = f"127.0.0.1:{port}"
+worker_class = "uvicorn.workers.UvicornWorker"
+
+# gunicorn -c gunicorn_config.py app:app
